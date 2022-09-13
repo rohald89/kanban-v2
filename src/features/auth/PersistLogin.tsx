@@ -9,6 +9,7 @@ const PersistLogin = () => {
   const [persist] = usePersist();
   const token = useSelector(selectCurrentToken);
   const effectRan = useRef(false);
+  console.log(token);
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 

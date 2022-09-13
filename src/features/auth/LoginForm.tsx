@@ -1,10 +1,12 @@
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import TextInput from '../../components/TextInput';
 import { useLoginMutation } from './authApiSlice';
 import { setCredentials } from './authSlice';
 
 function LoginForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
   return (
@@ -18,7 +20,7 @@ function LoginForm() {
         try {
           const { accessToken } = await login(values).unwrap();
           dispatch(setCredentials({ accessToken }));
-          console.log(accessToken)
+          navigate('/dashboard');
         } catch (err) {
           console.error(err);
         }
