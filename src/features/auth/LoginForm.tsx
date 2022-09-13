@@ -27,7 +27,7 @@ function LoginForm() {
       }}
     >
       {(formik) => (
-        <div className="w-full mx-auto rounded-md p-6 bg-white dark:bg-darkGrey md:p-8">
+        <div className="max-w-lg w-11/12 bg-white p-6">
           <h1 className="heading-lg mb-6">Login</h1>
 
           <Form>
