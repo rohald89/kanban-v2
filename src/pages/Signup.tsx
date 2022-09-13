@@ -1,6 +1,6 @@
-import LoginForm from '../features/auth/LoginForm';
+import SignupForm from '../features/users/SignupForm';
 
-function Login() {
+function Signup() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-white dark:bg-veryDarkGrey">
       <svg
@@ -16,8 +16,8 @@ function Login() {
           <rect opacity=".5" x="18" width="6" height="25" rx="2" />
         </g>
       </svg>
-      <LoginForm />
+      <SignupForm />
     </div>
   );
 }
-export default Login;
+export default Signup;

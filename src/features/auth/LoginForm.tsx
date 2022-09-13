@@ -1,6 +1,6 @@
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/TextInput';
 import { useLoginMutation } from './authApiSlice';
 import { setCredentials } from './authSlice';
@@ -27,10 +27,10 @@ function LoginForm() {
       }}
     >
       {(formik) => (
-        <div className="max-w-lg w-11/12 bg-white p-6">
+        <div className="space-y-6 max-w-lg w-11/12 rounded-[4px] text-darkGrey bg-white p-6 dark:text-lightGrey dark:bg-darkGrey md:p-8">
           <h1 className="heading-lg mb-6">Login</h1>
 
-          <Form>
+          <Form className="space-y-4">
             <TextInput
               label="Email"
               name="emailAddress"
@@ -51,6 +51,7 @@ function LoginForm() {
               Sign In
             </button>
           </Form>
+          <p className="body-lg text-mediumGrey dark:text-white">Don't have an account yet? <Link to="/signup" className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover">Sign Up</Link></p>
         </div>
       )}
     </Formik>
