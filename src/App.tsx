@@ -7,6 +7,8 @@ import useTheme from './hooks/useTheme';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import NotFound from './pages/NotFound';
 
 export function App() {
@@ -17,6 +19,8 @@ export function App() {
         <Route index element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/reset" element={<ResetPassword />} />
 
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>

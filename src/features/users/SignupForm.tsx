@@ -39,7 +39,6 @@ function SignupForm() {
       }}
       validationSchema={validationSchema}
       onSubmit={async (values) => {
-        console.log(values);
         try {
           const newUser = await addNewUser(values);
           const { accessToken } = await login({

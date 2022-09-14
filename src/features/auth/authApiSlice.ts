@@ -43,8 +43,43 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    forgotPassword: builder.mutation({
+      query: (emailAddress) => ({
+        url: '/auth/forgot',
+        method: 'POST',
+        body: emailAddress,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: '/auth/reset',
+        method: 'POST',
+        body: { ...data },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useSendLogoutMutation, useRefreshMutation } =
-  authApiSlice;
+export const {
+  useLoginMutation,
+  useSendLogoutMutation,
+  useRefreshMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = authApiSlice;
