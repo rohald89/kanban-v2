@@ -1,13 +1,14 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/TextInput';
 import { useResetPasswordMutation } from './authApiSlice';
 
 function ResetPasswordForm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const validationSchema = Yup.object({
@@ -22,15 +23,13 @@ function ResetPasswordForm() {
   return (
     <Formik
       initialValues={{
-        resetToken: '',
         password: '',
         confirmPassword: '',
       }}
       validationSchema={validationSchema}
       onSubmit={async (values) => {
-        console.log(values);
         try {
-          await resetPassword(values).unwrap();
+          await resetPassword({ resetToken: token, ...values }).unwrap();
           navigate('/login');
         } catch (err) {
           console.error(err);

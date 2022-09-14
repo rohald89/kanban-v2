@@ -5,14 +5,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/TextInput';
 import { useLoginMutation } from '../auth/authApiSlice';
 import { setCredentials } from '../auth/authSlice';
-import { useAddNewUserMutation } from './usersApiSlice';
+import { useCreateAccountMutation } from './usersApiSlice';
 
 function SignupForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
-  const [addNewUser, { isLoading: addUserLoading, isSuccess, isError, error }] =
-    useAddNewUserMutation();
+  const [
+    createAccount,
+    { isLoading: addUserLoading, isSuccess, isError, error },
+  ] = useCreateAccountMutation();
 
   const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -27,6 +29,9 @@ function SignupForm() {
     password: Yup.string()
       .min(8, 'Must be at least 8 characters')
       .required('Required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Required'),
   });
 
   return (
@@ -36,11 +41,12 @@ function SignupForm() {
         lastName: '',
         emailAddress: '',
         password: '',
+        confirmPassword: '',
       }}
       validationSchema={validationSchema}
       onSubmit={async (values) => {
         try {
-          const newUser = await addNewUser(values);
+          await createAccount(values);
           const { accessToken } = await login({
             emailAddress: values.emailAddress,
             password: values.password,
@@ -80,6 +86,12 @@ function SignupForm() {
               name="password"
               type="password"
               placeholder="Password"
+            />
+            <TextInput
+              label="Confirm Password"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
             />
 
             <button
