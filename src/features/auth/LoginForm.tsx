@@ -15,7 +15,7 @@ function LoginForm() {
         emailAddress: '',
         password: '',
       }}
-      onSubmit={ async (values) => {
+      onSubmit={async (values) => {
         console.log(values);
         try {
           const { accessToken } = await login(values).unwrap();
@@ -27,9 +27,8 @@ function LoginForm() {
       }}
     >
       {(formik) => (
-        <div className="space-y-6 max-w-lg w-11/12 rounded-[4px] text-darkGrey bg-white p-6 dark:text-lightGrey dark:bg-darkGrey md:p-8">
-          <h1 className="heading-lg mb-6">Login</h1>
-
+        <div className="max-w-lg w-11/12 rounded-[4px] text-darkGrey bg-white p-6 dark:text-lightGrey dark:bg-darkGrey md:p-8">
+          <h1 className="heading-lg mb-6">Sign In</h1>
           <Form className="space-y-4">
             <TextInput
               label="Email"
@@ -51,7 +50,24 @@ function LoginForm() {
               Sign In
             </button>
           </Form>
-          <p className="body-lg text-mediumGrey dark:text-white">Don't have an account yet? <Link to="/signup" className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover">Sign Up</Link></p>
+          <p className="body-lg mt-6 text-mediumGrey dark:text-white">
+            Don't have an account yet?{' '}
+            <Link
+              to="/signup"
+              className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover"
+            >
+              Sign Up
+            </Link>
+          </p>
+          <p className="body-lg  text-mediumGrey dark:text-white">
+            Forgot password?{' '}
+            <Link
+              to="/forgot"
+              className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover"
+            >
+              Request Reset
+            </Link>
+          </p>{' '}
         </div>
       )}
     </Formik>

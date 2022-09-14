@@ -22,8 +22,7 @@ function ResetPasswordForm() {
   return (
     <Formik
       initialValues={{
-        resetToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFmMjkxZTUzMWM2NGY3NDVlZjkyODUiLCJpYXQiOjE2NjMxNTIxNDAsImV4cCI6MTY2MzE1MzA0MH0.A6sC1ctyjztprByEOAzacMPRAI65KXBn1aflqauTXzs',
+        resetToken: '',
         password: '',
         confirmPassword: '',
       }}
@@ -66,7 +65,7 @@ function ResetPasswordForm() {
           <p className="body-lg mt-6 text-mediumGrey dark:text-white">
             Remember your password?{' '}
             <Link
-              to="/signup"
+              to="/signin"
               className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover"
             >
               Sign In
