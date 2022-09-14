@@ -1,6 +1,8 @@
 import { Formik, Form } from 'formik';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Notification from '../../components/Notification';
 import TextInput from '../../components/TextInput';
 import { useForgotPasswordMutation } from './authApiSlice';
 
@@ -13,12 +15,20 @@ function ForgotPasswordForm() {
       initialValues={{
         emailAddress: '',
       }}
-      onSubmit={ async (values) => {
-        console.log(values);
+      onSubmit={async (values) => {
         try {
           await forgotPassword(values).unwrap();
-          navigate('/login');
+          toast.custom((t) => (
+            <Notification
+              t={t}
+              status="success"
+              message="Check your email to proceed."
+            />
+          ));
         } catch (err) {
+          toast.custom((t) => (
+            <Notification t={t} status="error" message={err.data.message} />
+          ));
           console.error(err);
         }
       }}
@@ -42,8 +52,24 @@ function ForgotPasswordForm() {
               Reset Password
             </button>
           </Form>
-          <p className="body-lg mt-6 text-mediumGrey dark:text-white">Remember your password? <Link to="/signup" className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover">Sign In</Link></p>
-          <p className="body-lg text-mediumGrey dark:text-white">Don't have an account yet? <Link to="/signup" className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover">Sign Up</Link></p>
+          <p className="body-lg mt-6 text-mediumGrey dark:text-white">
+            Remember your password?{' '}
+            <Link
+              to="/signup"
+              className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover"
+            >
+              Sign In
+            </Link>
+          </p>
+          <p className="body-lg text-mediumGrey dark:text-white">
+            Don't have an account yet?{' '}
+            <Link
+              to="/signup"
+              className="ml-2 text-mainPurple font-bold hover:text-mainPurpleHover"
+            >
+              Sign Up
+            </Link>
+          </p>
         </div>
       )}
     </Formik>

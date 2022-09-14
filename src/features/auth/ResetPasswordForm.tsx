@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/TextInput';
 import { useResetPasswordMutation } from './authApiSlice';
+import toast from 'react-hot-toast';
+import Notification from '../../components/Notification';
 
 function ResetPasswordForm() {
   const navigate = useNavigate();
@@ -30,8 +32,10 @@ function ResetPasswordForm() {
       onSubmit={async (values) => {
         try {
           await resetPassword({ resetToken: token, ...values }).unwrap();
+          toast.custom((t) => <Notification t={t} status="success" message="Password reset successfully" />);
           navigate('/login');
         } catch (err) {
+          toast.custom((t) => <Notification t={t} status="error" message="Password reset failed" />);
           console.error(err);
         }
       }}

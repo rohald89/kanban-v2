@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth';
@@ -14,22 +15,25 @@ import NotFound from './pages/NotFound';
 export function App() {
   const { theme, toggleTheme } = useTheme();
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/reset" element={<ResetPassword />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
 
-        <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth />}>
-            <Route path="dashboard" element={<div>Dashboard</div>} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route path="dashboard" element={<div>Dashboard</div>} />
+            </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+      </Routes>
+      <Toaster position="top-center" />
+    </>
   );
 }
 

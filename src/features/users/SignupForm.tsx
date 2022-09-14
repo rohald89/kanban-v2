@@ -6,6 +6,8 @@ import TextInput from '../../components/TextInput';
 import { useLoginMutation } from '../auth/authApiSlice';
 import { setCredentials } from '../auth/authSlice';
 import { useCreateAccountMutation } from './usersApiSlice';
+import toast from 'react-hot-toast';
+import Notification from '../../components/Notification';
 
 function SignupForm() {
   const navigate = useNavigate();
@@ -51,9 +53,12 @@ function SignupForm() {
             emailAddress: values.emailAddress,
             password: values.password,
           }).unwrap();
+          toast.custom((t) => <Notification t={t} status="success" message="Account created successfully." />);
           dispatch(setCredentials({ accessToken }));
+          toast.custom((t) => <Notification t={t} status="success" message="You are now logged in." />);
           navigate('/dashboard');
         } catch (err) {
+          toast.custom((t) => <Notification t={t} status="error" message={err.data.message} />);
           console.error(err);
         }
       }}

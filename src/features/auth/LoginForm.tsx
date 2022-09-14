@@ -1,6 +1,8 @@
 import { Formik, Form } from 'formik';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Notification from '../../components/Notification';
 import TextInput from '../../components/TextInput';
 import { useLoginMutation } from './authApiSlice';
 import { setCredentials } from './authSlice';
@@ -20,8 +22,18 @@ function LoginForm() {
         try {
           const { accessToken } = await login(values).unwrap();
           dispatch(setCredentials({ accessToken }));
-          navigate('/dashboard');
+          toast.custom((t) => (
+            <Notification
+              t={t}
+              status="success"
+              message="You are now signed in."
+            />
+          ));
+            navigate('/dashboard');
         } catch (err) {
+          toast.custom((t) => (
+            <Notification t={t} status="error" message={err.data.message} />
+          ));
           console.error(err);
         }
       }}
