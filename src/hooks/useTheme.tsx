@@ -9,7 +9,10 @@ const useTheme = () => {
     ).matches;
     const themeStorage = localStorage.getItem('theme');
 
-    if (themeStorage === 'dark' || (themeStorage === null && systemPreference)) {
+    if (
+      themeStorage === 'dark' ||
+      (themeStorage === null && systemPreference)
+    ) {
       document.body.classList.add('dark');
       setTheme('dark');
     } else {
@@ -30,7 +33,19 @@ const useTheme = () => {
     }
   };
 
-  return { theme, toggleTheme };
+  const changeTheme = (theme) => {
+    if (theme === 'light') {
+      setTheme('light');
+      document.body.classList.remove('dark');
+      window.localStorage.setItem('theme', 'light');
+    } else {
+      setTheme('dark');
+      document.body.classList.add('dark');
+      window.localStorage.setItem('theme', 'dark');
+    }
+  };
+
+  return { theme, toggleTheme, changeTheme };
 };
 
 export default useTheme;

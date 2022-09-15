@@ -29,8 +29,9 @@ function LoginForm() {
               message="You are now signed in."
             />
           ));
-            navigate('/dashboard');
+          navigate('/dashboard');
         } catch (err) {
+            console.log(err);
           toast.custom((t) => (
             <Notification t={t} status="error" message={err.data.message} />
           ));

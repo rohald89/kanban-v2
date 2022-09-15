@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/components/header/**/*.{js,ts,jsx,tsx}',
     './src/features/auth/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',

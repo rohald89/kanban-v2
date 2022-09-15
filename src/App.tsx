@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
+import DashboardLayout from './components/DashboardLayout';
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth';
 import useTheme from './hooks/useTheme';
@@ -11,6 +12,7 @@ import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
 
 export function App() {
   const { theme, toggleTheme } = useTheme();
@@ -26,7 +28,9 @@ export function App() {
 
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
-              <Route path="dashboard" element={<div>Dashboard</div>} />
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
