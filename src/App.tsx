@@ -13,6 +13,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashboard';
+import Prefetch from './features/auth/Prefetch';
 
 export function App() {
   const { theme, toggleTheme } = useTheme();
@@ -28,8 +29,10 @@ export function App() {
 
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
-              <Route path="/dashboard" element={<DashboardLayout />}>
-                <Route index element={<Dashboard />} />
+              <Route element={<Prefetch />}>
+                <Route path="/dashboard" element={<DashboardLayout />}>
+                  <Route index element={<Dashboard />} />
+                </Route>
               </Route>
             </Route>
           </Route>
