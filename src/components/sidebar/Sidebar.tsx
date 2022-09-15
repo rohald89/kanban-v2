@@ -2,22 +2,22 @@ import { useGetBoardsQuery } from '../../features/boards/boardsApiSlice';
 import useWindowSize from '../../hooks/useWindowSize';
 import ThemeToggle from './ThemeToggle';
 
+
 function Sidebar({ isSidebarOpen }) {
-    const { width } = useWindowSize();
-    const {
-        data: boards,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-      } = useGetBoardsQuery();
 
-    if (width < 768) return null;
+  const { width } = useWindowSize();
+  const {
+    data: boards,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetBoardsQuery();
 
+  if (width < 768) return null;
 
   let content;
   console.log(boards);
-
 
   if (isLoading) content = <div>Loading...</div>;
   if (isError) content = <div>{error}</div>;
@@ -29,7 +29,7 @@ function Sidebar({ isSidebarOpen }) {
         {ids.map((id) => (
           <div
             key={id}
-            className={`group text-mediumGrey cursor-pointer flex space-x-3 items-center pl-6 w-11/12 transition duration-500 bg-opacity-0 bg-mainPurple dark:hover:bg-white rounded-r-full hover:bg-opacity-10 hover:text-mainPurple`}
+            className="group text-mediumGrey cursor-pointer flex space-x-3 items-center pl-6 w-11/12 transition duration-500 bg-opacity-0 bg-mainPurple dark:hover:bg-white rounded-r-full hover:bg-opacity-10 hover:text-mainPurple"
             // onClick={() => setActiveBoard(i)}
           >
             <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@ function Sidebar({ isSidebarOpen }) {
             </svg>
             <h3
               key={id}
-              className={`heading-m  font-bold text-mediumGrey py-3 group-hover:text-mainPurple`}
+              className="heading-m  font-bold text-mediumGrey py-3 group-hover:text-mainPurple"
             >
               {entities[id].name}
             </h3>
@@ -57,7 +57,7 @@ function Sidebar({ isSidebarOpen }) {
     >
       <div className="flex-1 w-full">
         <h3 className="heading-sm ml-6 uppercase">
-          All boards ({boards.ids.length})
+          All boards ({boards?.ids.length})
         </h3>
         <div className="mt-8">{content}</div>
       </div>

@@ -4,7 +4,6 @@ import Layout from './components/Layout';
 import DashboardLayout from './components/DashboardLayout';
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth';
-import useTheme from './hooks/useTheme';
 
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -16,7 +15,6 @@ import Dashboard from './pages/Dashboard';
 import Prefetch from './features/auth/Prefetch';
 
 export function App() {
-  const { theme, toggleTheme } = useTheme();
   return (
     <>
       <Routes>

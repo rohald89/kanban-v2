@@ -38,12 +38,12 @@ export const { useGetBoardsQuery } = boardsApiSlice;
 
 export const selectBoardsResult = boardsApiSlice.endpoints.getBoards.select();
 
-//create memoized selector
+// create memoized selector
 const selectBoardsData = createSelector(
-    selectBoardsResult,
-    boardsResult => boardsResult.data // normalized state object with ids and entities
-)
-
-export const {
-    selectAll: selectAllBoards,
-} = boardsAdapter.getSelectors(state => selectBoardsData(state) || initialState)
+  selectBoardsResult,
+  (boardsResult) => boardsResult.data // normalized state object with ids and entities
+);
+console.log(selectBoardsData);
+export const { selectAll: selectAllBoards } = boardsAdapter.getSelectors(
+  (state) => selectBoardsData(state) || initialState
+);
